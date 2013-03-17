@@ -1,0 +1,38 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Bootstrap 101 Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style>img{ height: 100px; float: left; }</style>
+    </head>
+    <body>
+    <h1>Hello, world!</h1>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function(){
+        $.ajax({
+          url: "/rank",
+          type: "get",
+          dataType: "json",
+          success: function(data) {
+          $.each(data.items, function(i,item){
+            $("<img/>").attr("src", item.media.m).appendTo("#images");
+          })
+      }
+        });
+
+
+
+});
+</script>
+
+
+
+<div id="images">
+</div>
+
+    </body>
+    </html>

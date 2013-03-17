@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>jQuery Ajax Example with JSON Response</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+            // 옵션추가 버튼 클릭시
+            $("#addItemBtn").click(function(){
+                // item 의 최대번호 구하기
+                var lastItemNo = $("#example tr:last").attr("class").replace("item", "");
+ 
+                var newitem = $("#example tr:eq(1)").clone();
+                newitem.removeClass();
+                newitem.find("td:eq(0)").attr("rowspan", "1");
+                newitem.addClass("item"+(parseInt(lastItemNo)+1));
+ 
+                $("#example").append(newitem);
+            });
+
+    
+    $(':submit').live('click', function() { // This event fires when a button is clicked
+        var button = $(this).val();
+        $.ajax({ // ajax call starts
+            url: 'serverside.php', // JQuery loads serverside.php
+            data: 'button=' + $(this).val(), // Send value of the clicked button
+            dataType: 'json', // Choosing a JSON datatype
+            success: function(data) // Variable data constains the data we get from serverside
+            {
+                $('#wines').html(''); // Clear #wines div
+                
+                if (button == 'all') { // If clicked buttons value is all, we post every wine
+                    for (var i in data.red) {
+                        $('#wines').append('Red wine: ' + data.red[i] + '<br/>');
+                    }
+                    for (var i in data.white) {
+                        $('#wines').append('White wine: ' + data.white[i] + '<br/>');
+                    }
+                }
+                else if (button == 'red') { // If clicked buttons value is red, we post only red wines
+                    for (var i in data) {
+                        $('#wines').append('Red wine: ' + data[i] + '<br/>');
+                    }
+                }
+                else if (button == 'white') { // If clicked buttons value is white, we post only white wines
+                    for (var i in data) {
+                        $('#wines').append('White wine: ' + data[i] + '<br/>');
+                    }
+                }
+            }
+        });
+        return false; // keeps the page from not refreshing 
+    });
+
+            // 삭제버튼 클릭시
+            $(".delBtn").live("click", function(){
+                var clickedRow = $(this).parent().parent();
+                var cls = clickedRow.attr("class");
+                 
+                // 각 항목의 첫번째 row를 삭제한 경우 다음 row에 td 하나를 추가해 준다.
+                if( clickedRow.find("td:eq(0)").attr("rowspan") ){
+                    if( clickedRow.next().hasClass(cls) ){
+                        clickedRow.next().prepend(clickedRow.find("td:eq(0)"));
+                    }
+                }
+ 
+                clickedRow.remove();
+ 
+                // rowspan 조정
+                resizeRowspan(cls);
+            });
+ 
+            // cls : rowspan 을 조정할 class ex) item1, item2, ...
+            function resizeRowspan(cls){
+                var rowspan = $("."+cls).length;
+                $("."+cls+":first td:eq(0)").attr("rowspan", rowspan);
+            }
+});
+</script>
+
+</head>
+
+<body>
+    <form method="post" action="">
+        <button value="all" type="submit">Get All Wines!</button>
+        <button value="red" type="submit">Get Red Wines!</button>
+        <button value="white" type="submit">Get White Wines!</button>
+        <button id="addItemBtn">옵션추가</button>
+<table id="example" border="1px">
+        <tr>
+            <th>항목명</th>
+            <th>필수항목</th>
+            <th>가격</th>
+            <th>재고</th>
+            <th>옵션추가</th>
+        </tr>
+        <tr class="item1">
+            <td><input type="text" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><button class="delBtn">삭제</button></td>
+        </tr>
+        <tr class="item2">
+            <td><input type="text" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><button class="delBtn">삭제</button></td>
+        </tr>
+        <tr class="item3">
+            <td><input type="text" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><button class="delBtn">삭제</button></td>
+        </tr>
+        <tr class="item4">
+            <td><input type="text" /></td>
+            <td><input type="checkbox" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><button class="delBtn">삭제</button></td>
+        </tr>
+</table>
+    </form>
+    
+    <div id="wines">
+    <!-- Javascript will print data in here -->
+    </div>
+
+</body>
+</html>
