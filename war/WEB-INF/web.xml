@@ -1,15 +1,92 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<servlet>
+		<servlet-name>MultiGalagaHtml5</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.MultiGalagaHtml5Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MultiGalagaHtml5</servlet-name>
+		<url-pattern>/multigalagahtml5</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<servlet>
+	 <servlet-name>SystemServiceServlet</servlet-name>
+	 <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+	 <init-param>
+	  <param-name>services</param-name>
+	  <param-value/>
+	 </init-param>
+	</servlet>
+	<servlet-mapping>
+	 <servlet-name>SystemServiceServlet</servlet-name>
+	 <url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+
+<!-- Enter -->	
+	<servlet>
+		<servlet-name>Enter</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.EnterServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Enter</servlet-name>
+		<url-pattern>/enter</url-pattern>
+	</servlet-mapping>
+<!-- Ready -->	
+	<servlet>
+		<servlet-name>Ready</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.ReadyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Ready</servlet-name>
+		<url-pattern>/ready</url-pattern>
+	</servlet-mapping>
+ <!-- Over -->	
+	<servlet>
+		<servlet-name>Over</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.OverServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Over</servlet-name>
+		<url-pattern>/over</url-pattern>
+	</servlet-mapping>
+ <!-- PlayerInfo -->	
+	<servlet>
+		<servlet-name>PlayerInfo</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.PlayerInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PlayerInfo</servlet-name>
+		<url-pattern>/playerinfo</url-pattern>
+	</servlet-mapping>
+ <!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>RoomInfo</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.RoomInfoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RoomInfo</servlet-name>
+		<url-pattern>/roominfo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>Image</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.ImageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Image</servlet-name>
+		<url-pattern>/image</url-pattern>
+	</servlet-mapping>
+	
+	<!-- RoomInfo -->	
+	<servlet>
+		<servlet-name>Rank</servlet-name>
+		<servlet-class>org.gdg.suwon.galaga.RankServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Rank</servlet-name>
+		<url-pattern>/rank</url-pattern>
+	</servlet-mapping>
   
- <servlet>
-  <servlet-name>SystemServiceServlet</servlet-name>
-  <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
-  <init-param>
-   <param-name>services</param-name>
-   <param-value/>
-  </init-param>
- </servlet>
- <servlet-mapping>
-  <servlet-name>SystemServiceServlet</servlet-name>
-  <url-pattern>/_ah/spi/*</url-pattern>
- </servlet-mapping>
 </web-app>
